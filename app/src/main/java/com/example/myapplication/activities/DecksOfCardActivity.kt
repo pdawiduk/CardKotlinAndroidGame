@@ -80,19 +80,19 @@ class DecksOfCardActivity : AppCompatActivity() {
         var cardsMapBySuite = mapOf<String,MutableList<Int>>().toMutableMap()
         val viewPager: ViewPager = findViewById(R.id.view_pager)
         val tabs: TabLayout = findViewById(R.id.tabs)
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager, listOfCards)
-
+        var sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager, listOfCards)
+        viewPager.adapter = sectionsPagerAdapter
         if(!loaded) {
 
-            viewPager.adapter = sectionsPagerAdapter
+
             tabs.setupWithViewPager(viewPager)
             loaded =true
         }
         else{
 
-            viewPager.adapter =null
+
             viewPager.adapter =sectionsPagerAdapter
-            tabs.setupWithViewPager(viewPager)
+            viewPager!!.adapter!!.notifyDataSetChanged()
         }
 
         viewPager.adapter?.notifyDataSetChanged()
